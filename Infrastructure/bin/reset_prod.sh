@@ -18,6 +18,22 @@ echo "Resetting Parks Production Environment in project ${GUID}-parks-prod to Gr
 # rollout followed by a Green rollout.
 
 # To be Implemented by Student
-oc patch route/mlbparks -p '{"spec":{"to":{"name":"mlbparks-green"}}}' -n $GUID-parks-prod || true
-oc patch route/nationalparks -p '{"spec":{"to":{"name":"nationalparks-green"}}}' -n $GUID-parks-prod || true
-oc patch route/parksmap -p '{"spec":{"to":{"name":"parksmap-green"}}}' -n $GUID-parks-prod || true
+if [ oc get route/mlbparks -n ${GUID}-parks-prod |grep "mlbparks-blue" ]; then
+    echo "mlbparks-blue to mlbparks-green"
+    oc patch route/mlbparks -p '{"spec":{"to":{"name":"mlbparks-green"}}}' -n $GUID-parks-prod
+    else
+    echo "mlbparks-green svc currently"
+fi
+if [ oc get route/nationalparks -n ${GUID}-parks-prod |grep "nationalparks-blue" ]; then
+    echo "nationalparks-blue to nationalparks-green"
+    oc patch route/nationalparks -p '{"spec":{"to":{"name":"nationalparks-green"}}}' -n $GUID-parks-prod
+    else
+    echo "nationalparks-green svc currently"
+fi
+if [ oc get route/parksmap -n ${GUID}-parks-prod |grep "parksmap-blue" ]; then
+    echo "parksmap-blue to parksmap-green"
+    oc patch route/parksmap -p '{"spec":{"to":{"name":"parksmap-green"}}}' -n $GUID-parks-prod
+    else
+    echo "parksmap-green svc currently"
+fi
+
