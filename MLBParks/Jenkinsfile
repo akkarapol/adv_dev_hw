@@ -19,7 +19,7 @@ podTemplate(
     
     // Checkout Source Code.
     stage('Checkout Source') {
-      git url: 'https://github.com/akkarapol/advdev_homework_template.git'
+      git url: "${REPO}"
     }
 
     // Your Pipeline Code goes here. Make sure to use the ${GUID} and ${CLUSTER} parameters where appropriate
