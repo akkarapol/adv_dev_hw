@@ -26,12 +26,9 @@ podTemplate(
     // You need to build the application in directory `MLBParks`.
     // Also copy "../nexus_settings.xml" to your build directory
     // and replace 'GUID' in the file with your ${GUID} to point to >your< Nexus instance
-    //sh "cp ./nexus_settings.xml ./MLBParks/ -u"
-    //sh "sed -i 's/GUID/${GUID}/' ./MLBParks/nexus_settings.xml"
     
     // Define Maven Command to point to the correct
     // settings for our Nexus installation
-    // def mvnCmd = "mvn -s nexus_settings.xml clean package -DskipTests=true" 
     def mvnCmd = "mvn -s ../nexus_settings.xml clean package -DskipTests=true" 
 
     // Build the MLBParks Service
