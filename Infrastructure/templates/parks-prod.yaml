@@ -76,7 +76,7 @@ objects:
               configMapKeyRef:
                 key: DB_HOST
                 name: mongodb-config
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/mlbparks-dev:0.0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/mlbparks:0.0
           imagePullPolicy: IfNotPresent
           name: mlbparks-blue
           livenessProbe:
@@ -204,7 +204,7 @@ objects:
               configMapKeyRef:
                 key: DB_PASSWORD
                 name: mongodb-config
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/mlbparks-dev:0.0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/mlbparks:0.0
           imagePullPolicy: IfNotPresent
           name: mlbparks-green
           livenessProbe:
@@ -332,7 +332,7 @@ objects:
               configMapKeyRef:
                 key: DB_HOST
                 name: mongodb-config
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/nationalparks-dev:0.0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/nationalparks:0.0
           imagePullPolicy: IfNotPresent
           name: nationalparks-blue
           livenessProbe:
@@ -460,7 +460,7 @@ objects:
               configMapKeyRef:
                 key: DB_HOST
                 name: mongodb-config
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/nationalparks-dev:0.0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/nationalparks:0.0
           imagePullPolicy: IfNotPresent
           name: nationalparks-green
           livenessProbe:
@@ -558,7 +558,7 @@ objects:
               configMapKeyRef:
                 key: parksmap-blue
                 name: appname
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/parksmap-dev:0.0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/parksmap:0.0
           imagePullPolicy: IfNotPresent
           name: parksmap-blue
           livenessProbe:
@@ -656,7 +656,7 @@ objects:
               configMapKeyRef:
                 key: parksmap-green
                 name: appname
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/parksmap-dev:0.0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/parksmap:0.0
           imagePullPolicy: IfNotPresent
           name: parksmap-green
           livenessProbe:
