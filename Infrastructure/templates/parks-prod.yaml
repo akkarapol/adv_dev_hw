@@ -1053,7 +1053,7 @@ objects:
       targetPort: 8080
     to:
       kind: Service
-      name: mlbparks-blue
+      name: mlbparks-green
       weight: 100
     wildcardPolicy: None
   status:
@@ -1078,7 +1078,7 @@ objects:
       targetPort: 8080
     to:
       kind: Service
-      name: parksmap-blue
+      name: parksmap-green
       weight: 100
     wildcardPolicy: None
   status:
@@ -1104,7 +1104,7 @@ objects:
       targetPort: 8080
     to:
       kind: Service
-      name: nationalparks-blue
+      name: nationalparks-green
       weight: 100
     wildcardPolicy: None
   status:
