@@ -11,15 +11,15 @@ objects:
       openshift.io/generated-by: OpenShiftNewBuild
     creationTimestamp: null
     labels:
-      build: mlbparks-dev
-    name: mlbparks-dev
+      build: mlbparks
+    name: mlbparks
   spec:
     failedBuildsHistoryLimit: 5
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: mlbparks-dev:latest
+        name: mlbparks:latest
     postCommit: {}
     resources: {}
     runPolicy: Serial
@@ -50,15 +50,15 @@ objects:
       openshift.io/generated-by: OpenShiftNewBuild
     creationTimestamp: null
     labels:
-      build: nationalparks-dev
-    name: nationalparks-dev
+      build: nationalparks
+    name: nationalparks
   spec:
     failedBuildsHistoryLimit: 5
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: nationalparks-dev:latest
+        name: nationalparks:latest
     postCommit: {}
     resources: {}
     runPolicy: Serial
@@ -89,15 +89,15 @@ objects:
       openshift.io/generated-by: OpenShiftNewBuild
     creationTimestamp: null
     labels:
-      build: parksmap-dev
-    name: parksmap-dev
+      build: parksmap
+    name: parksmap
   spec:
     failedBuildsHistoryLimit: 5
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: parksmap-dev:latest
+        name: parksmap:latest
     postCommit: {}
     resources: {}
     runPolicy: Serial
@@ -130,8 +130,8 @@ objects:
     creationTimestamp: null
     generation: 5
     labels:
-      build: mlbparks-dev
-    name: mlbparks-dev
+      build: mlbparks
+    name: mlbparks
   spec:
     lookupPolicy:
       local: false
@@ -173,8 +173,8 @@ objects:
     creationTimestamp: null
     generation: 3
     labels:
-      build: nationalparks-dev
-    name: nationalparks-dev
+      build: nationalparks
+    name: nationalparks
   spec:
     lookupPolicy:
       local: false
@@ -189,8 +189,8 @@ objects:
     creationTimestamp: null
     generation: 3
     labels:
-      build: parksmap-dev
-    name: parksmap-dev
+      build: parksmap
+    name: parksmap
   spec:
     lookupPolicy:
       local: false
@@ -204,14 +204,14 @@ objects:
     creationTimestamp: null
     generation: 1
     labels:
-      app: mlbparks-dev
-    name: mlbparks-dev
+      app: mlbparks
+    name: mlbparks
   spec:
     replicas: 1
     revisionHistoryLimit: 10
     selector:
-      app: mlbparks-dev
-      deploymentconfig: mlbparks-dev
+      app: mlbparks
+      deploymentconfig: mlbparks
     strategy:
       activeDeadlineSeconds: 21600
       resources: {}
@@ -228,15 +228,15 @@ objects:
           openshift.io/generated-by: OpenShiftNewApp
         creationTimestamp: null
         labels:
-          app: mlbparks-dev
-          deploymentconfig: mlbparks-dev
+          app: mlbparks
+          deploymentconfig: mlbparks
       spec:
         containers:
         - env:
           - name: APPNAME
             valueFrom:
               configMapKeyRef:
-                key: mlbparks-dev
+                key: mlbparks
                 name: appname
           - name: DB_PASSWORD
             valueFrom:
@@ -263,9 +263,9 @@ objects:
               configMapKeyRef:
                 key: DB_NAME
                 name: mongodb-config
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/mlbparks-dev:0.0-0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/mlbparks:0.0-0
           imagePullPolicy: IfNotPresent
-          name: mlbparks-dev
+          name: mlbparks
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -410,14 +410,14 @@ objects:
     creationTimestamp: null
     generation: 1
     labels:
-      app: nationalparks-dev
-    name: nationalparks-dev
+      app: nationalparks
+    name: nationalparks
   spec:
     replicas: 1
     revisionHistoryLimit: 10
     selector:
-      app: nationalparks-dev
-      deploymentconfig: nationalparks-dev
+      app: nationalparks
+      deploymentconfig: nationalparks
     strategy:
       activeDeadlineSeconds: 21600
       resources: {}
@@ -434,15 +434,15 @@ objects:
           openshift.io/generated-by: OpenShiftNewApp
         creationTimestamp: null
         labels:
-          app: nationalparks-dev
-          deploymentconfig: nationalparks-dev
+          app: nationalparks
+          deploymentconfig: nationalparks
       spec:
         containers:
         - env:
           - name: APPNAME
             valueFrom:
               configMapKeyRef:
-                key: nationalparks-dev
+                key: nationalparks
                 name: appname
           - name: DB_PASSWORD
             valueFrom:
@@ -469,9 +469,9 @@ objects:
               configMapKeyRef:
                 key: DB_NAME
                 name: mongodb-config
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/nationalparks-dev:0.0-0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/nationalparks:0.0-0
           imagePullPolicy: IfNotPresent          
-          name: nationalparks-dev
+          name: nationalparks
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -533,14 +533,14 @@ objects:
     creationTimestamp: null
     generation: 1
     labels:
-      app: parksmap-dev
-    name: parksmap-dev
+      app: parksmap
+    name: parksmap
   spec:
     replicas: 1
     revisionHistoryLimit: 10
     selector:
-      app: parksmap-dev
-      deploymentconfig: parksmap-dev
+      app: parksmap
+      deploymentconfig: parksmap
     strategy:
       activeDeadlineSeconds: 21600
       resources: {}
@@ -557,19 +557,19 @@ objects:
           openshift.io/generated-by: OpenShiftNewApp
         creationTimestamp: null
         labels:
-          app: parksmap-dev
-          deploymentconfig: parksmap-dev
+          app: parksmap
+          deploymentconfig: parksmap
       spec:
         containers:
         - env:
           - name: APPNAME
             valueFrom:
               configMapKeyRef:
-                key: parksmap-dev
+                key: parksmap
                 name: appname
-          image: docker-registry.default.svc:5000/akkarapol-parks-dev/parksmap-dev:0.0-0
+          image: docker-registry.default.svc:5000/akkarapol-parks-dev/parksmap:0.0-0
           imagePullPolicy: IfNotPresent
-          name: parksmap-dev
+          name: parksmap
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -628,18 +628,18 @@ objects:
   metadata:
     creationTimestamp: null
     labels:
-      app: mlbparks-dev
+      app: mlbparks
       role: backend
       type: parksmap-backend
-    name: mlbparks-dev
+    name: mlbparks
   spec:
     ports:
     - port: 8080
       protocol: TCP
       targetPort: 8080
     selector:
-      app: mlbparks-dev
-      deploymentconfig: mlbparks-dev
+      app: mlbparks
+      deploymentconfig: mlbparks
     sessionAffinity: None
     type: ClusterIP
   status:
@@ -671,18 +671,18 @@ objects:
   metadata:
     creationTimestamp: null
     labels:
-      app: nationalparks-dev
+      app: nationalparks
       role: backend
       type: parksmap-backend
-    name: nationalparks-dev
+    name: nationalparks
   spec:
     ports:
     - port: 8080
       protocol: TCP
       targetPort: 8080
     selector:
-      app: nationalparks-dev
-      deploymentconfig: nationalparks-dev
+      app: nationalparks
+      deploymentconfig: nationalparks
     sessionAffinity: None
     type: ClusterIP
   status:
@@ -692,17 +692,17 @@ objects:
   metadata:
     creationTimestamp: null
     labels:
-      app: parksmap-dev
+      app: parksmap
       role: fronted
-    name: parksmap-dev
+    name: parksmap
   spec:
     ports:
     - port: 8080
       protocol: TCP
       targetPort: 8080
     selector:
-      app: parksmap-dev
-      deploymentconfig: parksmap-dev
+      app: parksmap
+      deploymentconfig: parksmap
     sessionAffinity: None
     type: ClusterIP
   status:
@@ -744,9 +744,9 @@ objects:
     name: parksmap-config
 - apiVersion: v1
   data:
-    mlbparks-dev: MLB Parks (Dev)
-    nationalparks-dev: National Parks (Dev)
-    parksmap-dev: ParksMap (Dev)
+    mlbparks: MLB Parks (Dev)
+    nationalparks: National Parks (Dev)
+    parksmap: ParksMap (Dev)
   kind: ConfigMap
   metadata:
     creationTimestamp: null
@@ -758,14 +758,14 @@ objects:
       openshift.io/host.generated: "true"
     creationTimestamp: null
     labels:
-      app: mlbparks-dev
-    name: mlbparks-dev
+      app: mlbparks
+    name: mlbparks
   spec:
     port:
       targetPort: 8080
     to:
       kind: Service
-      name: mlbparks-dev
+      name: mlbparks
       weight: 100
     wildcardPolicy: None
   status:
@@ -783,14 +783,14 @@ objects:
       openshift.io/host.generated: "true"
     creationTimestamp: null
     labels:
-      app: nationalparks-dev
-    name: nationalparks-dev
+      app: nationalparks
+    name: nationalparks
   spec:
     port:
       targetPort: 8080
     to:
       kind: Service
-      name: nationalparks-dev
+      name: nationalparks
       weight: 100
     wildcardPolicy: None
   status:
@@ -808,14 +808,14 @@ objects:
       openshift.io/host.generated: "true"
     creationTimestamp: null
     labels:
-      app: parksmap-dev
-    name: parksmap-dev
+      app: parksmap
+    name: parksmap
   spec:
     port:
       targetPort: 8080
     to:
       kind: Service
-      name: parksmap-dev
+      name: parksmap
       weight: 100
     wildcardPolicy: None
   status:
