@@ -1,6 +1,5 @@
+#!groovy
 // Jenkinsfile for NationalParks
-//GUID='test2'
-//CLUSTER='na311.openshift.opentlc.com'
 podTemplate(
   label: "skopeo-pod",
   cloud: "openshift",
