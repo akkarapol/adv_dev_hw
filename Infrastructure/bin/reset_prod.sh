@@ -18,9 +18,12 @@ echo "Resetting Parks Production Environment in project ${GUID}-parks-prod to Gr
 # rollout followed by a Green rollout.
 
 # To be Implemented by Student
-oc get route/nationalparks -n ${GUID}-parks-prod |grep 'nationalparks-blue'
+oc get route/mlbparks -n ${GUID}-parks-prod |grep 'mlbparks-blue'
 if [ $? == "1" ];  then
+    echo "mlbparks-blue to nationalparks-green"
     oc patch route/mlbparks -p '{"spec":{"to":{"name":"mlbparks-green"}}}' -n $GUID-parks-prod
+    else
+    echo "mlbparks-green currently"
 fi
 
 oc patch route/nationalparks -p '{"spec":{"to":{"name":"nationalparks-green"}}}' -n $GUID-parks-prod
