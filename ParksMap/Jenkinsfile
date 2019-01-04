@@ -84,13 +84,13 @@ podTemplate(
         // The filename is parksmap.jar in the 'target' directory of your current
         // Jenkins workspace
         // Replace ${GUID}-parks-dev with the name of your dev project
-        sh "oc start-build parksmap-dev --follow --from-file=./target/parksmap.jar -n ${GUID}-parks-dev"
+        sh "oc start-build parksmap --follow --from-file=./target/parksmap.jar -n ${GUID}-parks-dev"
 
         // OR use the file you just published into Nexus:
-        //sh "oc start-build parksmap-dev --follow --from-file=http://nexus3.${GUID}-nexus.svc.cluster.local:8081/repository/releases/com/openshift/evg/roadshow/parksmap/${version}/parksmap-${version}.war -n ${GUID}-parks-dev"
+        //sh "oc start-build parksmap --follow --from-file=http://nexus3.${GUID}-nexus.svc.cluster.local:8081/repository/releases/com/openshift/evg/roadshow/parksmap/${version}/parksmap-${version}.war -n ${GUID}-parks-dev"
 
         // Tag the image using the devTag
-        openshiftTag alias: 'false', destStream: 'parksmap-dev', destTag: devTag, destinationNamespace: "${GUID}-parks-dev", namespace: "${GUID}-parks-dev", srcStream: 'parksmap-dev', srcTag: 'latest', verbose: 'false'
+        openshiftTag alias: 'false', destStream: 'parksmap', destTag: devTag, destinationNamespace: "${GUID}-parks-dev", namespace: "${GUID}-parks-dev", srcStream: 'parksmap', srcTag: 'latest', verbose: 'false'
         // TBD: Build Image, tag Image
       }
 
@@ -98,13 +98,13 @@ podTemplate(
       stage('Deploy to Dev') {
         echo "Deploying container image to Development Project"
         // Update the Image on the Development Deployment Config
-        sh "oc set image dc/parksmap-dev parksmap-dev=docker-registry.default.svc:5000/${GUID}-parks-dev/parksmap-dev:${devTag} -n ${GUID}-parks-dev"
+        sh "oc set image dc/parksmap parksmap=docker-registry.default.svc:5000/${GUID}-parks-dev/parksmap:${devTag} -n ${GUID}-parks-dev"
 
         // Deploy the development application.
         // Replace ${GUID}-parks-dev with the name of your production project
-        openshiftDeploy depCfg: 'parksmap-dev', namespace: "${GUID}-parks-dev", verbose: 'false', waitTime: '', waitUnit: 'sec'
-        openshiftVerifyDeployment depCfg: 'parksmap-dev', namespace: "${GUID}-parks-dev", replicaCount: '1', verbose: 'false', verifyReplicaCount: 'false', waitTime: '', waitUnit: 'sec'
-        openshiftVerifyService namespace: "${GUID}-parks-dev", svcName: 'parksmap-dev', verbose: 'false'
+        openshiftDeploy depCfg: 'parksmap', namespace: "${GUID}-parks-dev", verbose: 'false', waitTime: '', waitUnit: 'sec'
+        openshiftVerifyDeployment depCfg: 'parksmap', namespace: "${GUID}-parks-dev", replicaCount: '1', verbose: 'false', verifyReplicaCount: 'false', waitTime: '', waitUnit: 'sec'
+        openshiftVerifyService namespace: "${GUID}-parks-dev", svcName: 'parksmap', verbose: 'false'
         // TBD: Deploy to development Project
         //      Set Image, Set VERSION
         //      Make sure the application is running and ready before proceeding
@@ -114,9 +114,9 @@ podTemplate(
         echo "Running Integration Tests"
         sleep 30
         echo "Parksmap ws List backend"
-        sh "curl -i -H 'Content-Length: 0' -X GET http://parksmap-dev-${GUID}-parks-dev.apps.${CLUSTER}/ws/backends/list/"
+        sh "curl -i -H 'Content-Length: 0' -X GET http://parksmap-${GUID}-parks-dev.apps.${CLUSTER}/ws/backends/list/"
 	echo "Parksmap ws Return Application Name"
-        sh "curl -i -H 'Content-Length: 0' -X GET http://parksmap-dev-${GUID}-parks-dev.apps.${CLUSTER}/ws/appname/"
+        sh "curl -i -H 'Content-Length: 0' -X GET http://parksmap-${GUID}-parks-dev.apps.${CLUSTER}/ws/appname/"
       }
 
       // Copy Image to Nexus container registry
@@ -124,10 +124,10 @@ podTemplate(
         echo "Copy image to Nexus container registry"
 
         // TBD: Copy image to Nexus container registry
-        sh "skopeo copy --src-tls-verify=false --dest-tls-verify=false --src-creds openshift:\$(oc whoami -t) --dest-creds admin:admin123 docker://docker-registry.default.svc.cluster.local:5000/${GUID}-parks-dev/parksmap-dev:${devTag} docker://nexus-registry.${GUID}-nexus.svc.cluster.local:5000/parksmap-dev:${devTag}"
+        sh "skopeo copy --src-tls-verify=false --dest-tls-verify=false --src-creds openshift:\$(oc whoami -t) --dest-creds admin:admin123 docker://docker-registry.default.svc.cluster.local:5000/${GUID}-parks-dev/parksmap:${devTag} docker://nexus-registry.${GUID}-nexus.svc.cluster.local:5000/parksmap:${devTag}"
 
         // TBD: Tag the built image with the production tag.
-        openshiftTag alias: 'false', destStream: 'parksmap-dev', destTag: prodTag, destinationNamespace: "${GUID}-parks-dev", namespace: "${GUID}-parks-dev", srcStream: 'parksmap-dev', srcTag: devTag, verbose: 'false'
+        openshiftTag alias: 'false', destStream: 'parksmap', destTag: prodTag, destinationNamespace: "${GUID}-parks-dev", namespace: "${GUID}-parks-dev", srcStream: 'parksmap', srcTag: devTag, verbose: 'false'
       }
 
       // Blue/Green Deployment into Production
@@ -150,7 +150,7 @@ podTemplate(
         echo "Destination Application: " + destApp
 
         // Update the Image on the Production Deployment Config
-        sh "oc set image dc/${destApp} ${destApp}=docker-registry.default.svc:5000/${GUID}-parks-dev/parksmap-dev:${prodTag} -n ${GUID}-parks-prod"
+        sh "oc set image dc/${destApp} ${destApp}=docker-registry.default.svc:5000/${GUID}-parks-dev/parksmap:${prodTag} -n ${GUID}-parks-prod"
 
         // Update the Config Map which contains the users for the ParksMap application
         //sh "oc delete configmap ${destApp}-config -n ${GUID}-parks-prod --ignore-not-found=true"
