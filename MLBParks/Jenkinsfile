@@ -1,4 +1,5 @@
 // Jenkinsfile for MLBParks
+GUID='aa'
 echo "GUID ==> ${GUID}"
 podTemplate(
   label: "skopeo-pod",
