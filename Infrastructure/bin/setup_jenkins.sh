@@ -95,7 +95,7 @@ oc set env bc/parksmap-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n 
 
 while : ; do
    echo "Checking if jenkins-agent-appdev is Ready..."
-   oc get pod -n ${GUID}-jenkins|grep '\jenkins-agent-appdev\-'|grep -v deploy|grep "Completed"
+   oc get pod -n ${GUID}-jenkins|grep '\jenkins-agent-appdev\-'|grep "Completed"
    [[ "$?" == "1" ]] || break
    echo "$?" == "1"
    echo "...no. Sleeping 10 seconds."
